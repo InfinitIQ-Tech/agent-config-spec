@@ -1,0 +1,19 @@
+{
+  "id": "support_agent",
+  "name": "Support Agent",
+  "version": "v2",
+  "schema_version": "99",
+  "system_prompt": "Use the published support workflow.",
+  "runtime": {
+    "streaming": true
+  },
+  "model": {
+    "strategy": "single",
+    "candidates": [
+      {
+        "name": "primary",
+        "model": "openai:gpt-4o"
+      }
+    ]
+  }
+}

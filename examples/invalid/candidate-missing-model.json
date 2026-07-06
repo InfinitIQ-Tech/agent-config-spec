@@ -1,0 +1,18 @@
+{
+  "id": "support_agent",
+  "name": "Support Agent",
+  "version": "v2",
+  "schema_version": "2",
+  "system_prompt": "Use the published support workflow.",
+  "runtime": {
+    "streaming": true
+  },
+  "model": {
+    "strategy": "single",
+    "candidates": [
+      {
+        "name": "primary"
+      }
+    ]
+  }
+}
