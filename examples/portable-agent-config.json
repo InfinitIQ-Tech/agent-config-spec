@@ -85,5 +85,29 @@
     "blocked_topics": [
       "payments"
     ]
+  },
+  "output": {
+    "format": {
+      "type": "json_schema",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reply",
+          "choices"
+        ],
+        "properties": {
+          "reply": {
+            "type": "string"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
   }
 }

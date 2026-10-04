@@ -1,0 +1,34 @@
+{
+  "id": "story_companion",
+  "name": "Story Companion",
+  "version": "v1",
+  "schema_version": "2",
+  "system_prompt": "You are a friendly bedtime-story companion. Keep stories gentle, imaginative, and age-appropriate.",
+  "runtime": {
+    "streaming": true
+  },
+  "model": {
+    "strategy": "fallback",
+    "candidates": [
+      {
+        "name": "on_device",
+        "model": "apple:foundation-models"
+      },
+      {
+        "name": "cloud",
+        "model": "anthropic:claude-haiku-4-5"
+      }
+    ],
+    "routing_policy": {
+      "prefer_on_device": true
+    }
+  },
+  "output": {
+    "format": {
+      "type": "text",
+      "schema": {
+        "type": "object"
+      }
+    }
+  }
+}

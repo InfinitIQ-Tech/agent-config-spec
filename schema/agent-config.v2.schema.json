@@ -39,7 +39,8 @@
     "memory": { "$ref": "#/$defs/AgentMemoryConfig" },
     "retrieval": { "$ref": "#/$defs/AgentRetrievalConfig" },
     "tools": { "$ref": "#/$defs/AgentToolsConfig" },
-    "guardrails": { "$ref": "#/$defs/AgentGuardrailsConfig" }
+    "guardrails": { "$ref": "#/$defs/AgentGuardrailsConfig" },
+    "output": { "$ref": "#/$defs/AgentOutputConfig" }
   },
   "required": ["id", "name", "version", "schema_version", "system_prompt", "runtime", "model"],
   "$defs": {
@@ -227,6 +228,29 @@
           "description": "Execution constraints applied across all tools."
         }
       }
+    },
+    "AgentOutputFormat": {
+      "type": "object",
+      "description": "One per-turn response format. Mirrors the Anthropic Messages API output_config.format shape so runtimes can pass it through or map it to provider-native guided generation.",
+      "properties": {
+        "type": {
+          "enum": ["json_schema"],
+          "description": "Format discriminator. \"json_schema\" constrains each assistant turn's final payload to the declared JSON Schema."
+        },
+        "schema": {
+          "type": "object",
+          "description": "JSON Schema object the assistant turn's structured payload must conform to."
+        }
+      },
+      "required": ["type", "schema"]
+    },
+    "AgentOutputConfig": {
+      "type": "object",
+      "description": "Per-turn structured output declaration. Absent means unstructured text output (default behavior).",
+      "properties": {
+        "format": { "$ref": "#/$defs/AgentOutputFormat" }
+      },
+      "required": ["format"]
     },
     "AgentGuardrailsConfig": {
       "type": "object",
