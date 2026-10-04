@@ -122,6 +122,24 @@ own normalization rather than inferring hidden built-in tools.
 
 Guardrail semantics are runtime-defined; unknown members are pass-through.
 
+### `output` — per-turn structured output
+
+| Field | Type | Meaning |
+|---|---|---|
+| `format` | object | The response format *(required if section present)*: `type` (currently `"json_schema"`) and a JSON-Schema `schema` object each assistant turn's structured payload must conform to. |
+
+The shape mirrors the Anthropic Messages API `output_config.format` parameter
+so runtimes can pass it through to a cloud provider or map it to on-device
+guided generation. Absent means unstructured text output. This additive,
+optional section remains part of schema version `"2"` (AF-83).
+
+The manifest schema validates the format envelope; it does not define a
+provider's supported JSON Schema subset. Runtimes document their execution
+subset and reject schemas they cannot enforce instead of silently weakening
+constraints. The portable example declares an object with a `reply` string
+and a `choices` array of strings; the on-device example continues to exercise
+the unchanged unstructured default.
+
 ## Validating a manifest
 
 ```sh
